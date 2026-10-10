@@ -91,8 +91,8 @@ def build_pdf(filename):
         'Heading1_Custom',
         parent=styles['Heading1'],
         fontName='Helvetica-Bold',
-        fontSize=14,
-        leading=18,
+        fontSize=13,
+        leading=17,
         textColor=colors.HexColor('#0f172a'),
         spaceBefore=14,
         spaceAfter=8,
@@ -102,8 +102,8 @@ def build_pdf(filename):
         'Heading2_Custom',
         parent=styles['Heading2'],
         fontName='Helvetica-Bold',
-        fontSize=11,
-        leading=15,
+        fontSize=10.5,
+        leading=14,
         textColor=colors.HexColor('#1e293b'),
         spaceBefore=10,
         spaceAfter=4,
@@ -131,26 +131,17 @@ def build_pdf(filename):
         spaceAfter=4,
     )
 
-    badge_style = ParagraphStyle(
-        'Badge',
-        parent=styles['Normal'],
-        fontName='Helvetica-Bold',
-        fontSize=8.5,
-        leading=11,
-        textColor=colors.HexColor('#b45309'),
-    )
-
     story = []
 
-    # Title & Header Banner
-    story.append(Paragraph("BenaaOps (بنا السحابي)", title_style))
+    # Title & Header Banner (Pure English to prevent missing glyphs)
+    story.append(Paragraph("BenaaOps — Civil Operations Portal", title_style))
     story.append(Paragraph("Saudi Civil Construction Management Portal — Technical & Functional Specification", subtitle_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#f59e0b'), spaceAfter=14))
 
     # Executive Summary Card
     exec_text = """
-    <b>BenaaOps</b> is an enterprise-grade civil engineering and site operations web portal specifically engineered for general contractors, civil site engineers, and project consultants operating in the <b>Kingdom of Saudi Arabia (KSA)</b>. 
-    The system governs physical civil and structural works from deep excavation to superstructure and wet trades, ensuring full compliance with the <b>Saudi Building Code (SBC 301–305)</b>, Gulf hot-weather concrete pouring restrictions, ASTM testing protocols, and bilateral Arabic (RTL) / English (LTR) site management.
+    <b>BenaaOps</b> (Benaa Cloud Civil Portal) is an enterprise-grade civil engineering and site operations web application custom-built for general contractors, civil site engineers, and project consultants operating in the <b>Kingdom of Saudi Arabia (KSA)</b>. 
+    The system governs physical civil and structural milestones from deep excavation to superstructure and wet trades, ensuring strict compliance with the <b>Saudi Building Code (SBC 301–305)</b>, Gulf hot-weather concrete controls, ASTM/SBC lab tests, and bilateral English (LTR) and Arabic (RTL) site operations.
     """
     story.append(Paragraph(exec_text, body_style))
     story.append(Spacer(1, 10))
@@ -160,7 +151,7 @@ def build_pdf(filename):
         [Paragraph("<b>Framework:</b>", body_style), Paragraph("Next.js 16 (App Router) + TypeScript", body_style),
          Paragraph("<b>UI/UX Aesthetic:</b>", body_style), Paragraph("Light Enterprise Engineering (Tailwind CSS)", body_style)],
         [Paragraph("<b>Standard Compliance:</b>", body_style), Paragraph("SBC 301-305, ASTM, ACI 305R", body_style),
-         Paragraph("<b>Language / RTL:</b>", body_style), Paragraph("Dual EN (LTR) & AR (RTL) Toggle", body_style)],
+         Paragraph("<b>Bilingual / RTL:</b>", body_style), Paragraph("Dual English (LTR) & Arabic (RTL) Toggle", body_style)],
         [Paragraph("<b>Target Region:</b>", body_style), Paragraph("Kingdom of Saudi Arabia (Riyadh, Jeddah, NEOM)", body_style),
          Paragraph("<b>Currency / Dates:</b>", body_style), Paragraph("SAR (Saudi Riyals) / Dual Hijri & Gregorian", body_style)]
     ]
@@ -193,7 +184,7 @@ def build_pdf(filename):
 
     # Module 1
     story.append(Paragraph("Module 1: Executive Dashboard & Site Overview", h2_style))
-    story.append(Paragraph("• <b>4 Real-Time KPI Cards:</b> Active civil zones (Raft, Columns, Slabs, Masonry), Pending RFIs awaiting Consultant sign-off, Total Concrete Poured ($m^3$) vs project target with progress gauges, and Today's Hot Weather Safety Status.", bullet_style))
+    story.append(Paragraph("• <b>4 Real-Time KPI Cards:</b> Active civil zones (Raft, Columns, Slabs, Masonry), Pending RFIs awaiting Consultant sign-off, Total Concrete Poured (m3) vs project target with progress gauges, and Today's Hot Weather Safety Status.", bullet_style))
     story.append(Paragraph("• <b>Interactive Civil Milestones & Pour Timeline:</b> Visual stage-gate tracker tracking PCC Blinding & Tanking (100%), Substructure Raft (100%), Superstructure Columns & Slabs (64%), and AAC Blockwork (35%).", bullet_style))
     story.append(Paragraph("• <b>Hot Weather Pour Advisory & Ambient Simulator:</b> Interactive thermal slider (24°C to 46°C) allowing engineers to simulate ambient spikes and observe real-time SBC 304 warnings, ice batching protocols, and night pour mandates.", bullet_style))
 
@@ -212,7 +203,7 @@ def build_pdf(filename):
     story.append(Paragraph("• <b>Work Inspection Requests (WIR / RFI):</b> Sequence generation (e.g. <code>RFI-CIV-2026-1042</code>), multi-criteria filtering by Code A (Approved), Code B (Approved with Comments), Code C (Rejected), and Pending Consultant Sign-off.", bullet_style))
     story.append(Paragraph("• <b>Official Consultant Inspection Drawer:</b> Modal drawer simulating the official consultant approval docket with inspector notes, signatures, and stamps from leading Gulf consultants (Dar Al-Handasah, Khatib & Alami, Zuhair Fayez).", bullet_style))
     story.append(Paragraph("• <b>Material Inspection Requests (MIR):</b> Tracking Mill Test Certificates (MTC) for SABIC Grade 60 and Al Rajhi rebar, ready-mix batch designs, and Bitumat waterproofing membranes.", bullet_style))
-    story.append(Paragraph("• <b>ASTM / SBC Concrete Lab Cube Log:</b> Records Slump ($120\\text{mm} \\pm 25\\text{mm}$), fresh mix temperature ($\\le 32^\\circ\\text{C}$ limit), 7-day compressive breaks (70% threshold), and 28-day design strength compliance.", bullet_style))
+    story.append(Paragraph("• <b>ASTM / SBC Concrete Lab Cube Log:</b> Records Slump (120mm +/- 25mm), fresh mix temperature (<= 32°C limit), 7-day compressive breaks (70% threshold), and 28-day design strength compliance.", bullet_style))
 
     # Page Break for clean presentation
     story.append(PageBreak())
@@ -220,16 +211,16 @@ def build_pdf(filename):
     # Module 4
     story.append(Paragraph("Module 4: Concrete Pour Scheduler & Hot Weather Logistics (SBC 304)", h2_style))
     story.append(Paragraph("• <b>Hot Weather Thermal Protocol:</b> Strict enforcement of SBC 304 placement limits. Alerts when daytime casting must shift to night windows (20:00 - 04:00) with chilled water and flake ice batching.", bullet_style))
-    story.append(Paragraph("• <b>Interactive Pour Booking Engine:</b> Booking modal with volume input ($m^3$), mix designs (C30, C35, C40, C50), placing equipment (Boom Pump 42m/56m, Static Line Pump), and a live <b>Flake Ice Replacement Slider</b> dynamically predicting delivery temperatures.", bullet_style))
+    story.append(Paragraph("• <b>Interactive Pour Booking Engine:</b> Booking modal with volume input (m3), mix designs (C30, C35, C40, C50), placing equipment (Boom Pump 42m/56m, Static Line Pump), and a live <b>Flake Ice Replacement Slider</b> dynamically predicting delivery temperatures.", bullet_style))
     story.append(Paragraph("• <b>Printable Pour Permit Ticket:</b> Official site permit viewer complete with mix specifications, testing criteria, QC sign-offs, and print stylesheet.", bullet_style))
 
     story.append(Spacer(1, 8))
 
     # Module 5
     story.append(Paragraph("Module 5: Bar Bending Schedule (BBS) & Rebar Wastage Log", h2_style))
-    story.append(Paragraph("• <b>Diameter Allocations:</b> Comprehensive tracking across standard diameters: $\\Phi 8\\text{mm}, \\Phi 10\\text{mm}, \\Phi 12\\text{mm}, \\Phi 16\\text{mm}, \\Phi 20\\text{mm}, \\Phi 25\\text{mm}, \\Phi 32\\text{mm}$.", bullet_style))
-    story.append(Paragraph("• <b>Wastage Tolerance Ledger:</b> Tonnage reconciliation comparing Delivered vs Fabricated vs Cut-off Scrap against the Saudi industry benchmark ($\\le 3.5\\%$ scrap tolerance). Current portal metric: <b>2.68%</b> (Compliant).", bullet_style))
-    story.append(Paragraph("• <b>On-Site Rebar Calculator:</b> Practical tool calculating nominal weights using standard $D^2/162.2$ formula, including tension lap splices ($50\\Phi$) and total tonnage requirements.", bullet_style))
+    story.append(Paragraph("• <b>Diameter Allocations:</b> Comprehensive tracking across standard diameters: Phi 8mm, Phi 10mm, Phi 12mm, Phi 16mm, Phi 20mm, Phi 25mm, Phi 32mm.", bullet_style))
+    story.append(Paragraph("• <b>Wastage Tolerance Ledger:</b> Tonnage reconciliation comparing Delivered vs Fabricated vs Cut-off Scrap against the Saudi industry benchmark (<= 3.5% scrap tolerance). Current portal metric: <b>2.68%</b> (Compliant).", bullet_style))
+    story.append(Paragraph("• <b>On-Site Rebar Calculator:</b> Practical tool calculating nominal weights using standard D2/162.2 formula, including tension lap splices (50*D) and total tonnage requirements.", bullet_style))
 
     story.append(Spacer(1, 14))
 
